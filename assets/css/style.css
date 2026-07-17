@@ -1,0 +1,47 @@
+/* Estilos por defecto (Modo Claro) */
+body {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Estilos cuando se activa el Modo Oscuro */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+.resumen button {
+    font-size: 0.8rem;
+}
+
+.table button {
+    font-size: 0.8em;
+}
+
+/* Estilos del contenedor del diálogo */
+dialog {
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 550px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* El fondo oscuro detrás del modal */
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px); /* Opcional: difumina el fondo */
+}
+
+.modal-acciones {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+

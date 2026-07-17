@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Flow</title>
+    
+    <!-- Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
+    <!-- Bootstrap ICONS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Estilos Propios-->
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!-- Bootstrap JS-->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <!-- Libreria Moment para manejo de Fechas en JavaScript -->
+    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    
+    <!-- JavaScript Interno -->
+    <script defer type="module" src="./assets/js/script.js"></script>
+</head>
+
+<body>
+
+    <header class="py-3">
+        <h1 class="text-center">App Task Flow - Gestor de Tareas</h1>
+        
+        <div class="container d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-light" id="btn-modo">
+                <i class="bi bi-circle-half"></i>
+            </button>
+
+            <button type="button" class="btn btn-light" id="btn-aumentar">
+                <i class="bi bi-zoom-in"></i>
+            </button>
+
+            <button type="button" class="btn btn-light" id="btn-disminuir">
+                <i class="bi bi-zoom-out"></i>
+            </button>
+        </div>
+        
+    </header>
+
+    <main class="container">
+        <section class="py-2">
+            <h2>Crea una nueva tarea...</h2>
+            <form id="form-crear-tarea">
+                <div class="mb-2">
+                    <input type="text" class="form-control" name="descripcion" required
+                        placeholder="Agrega la descripción de la tarea...">
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="btn-crear-tarea">Crear Tarea</button>
+                    <button class="btn btn-primary d-none" type="button" disabled id="btn-crear-tarea-spinner">
+                        <span class="spinner-border spinner-border-sm" aria-hidden="true">
+                        </span>
+                        <span role="status">Procesando solicitud</span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="py- mt-3">
+            <h3>Listado de tareas...</h3>
+            <div class="resumen">
+                <button type="button" class="rounded-pill btn btn-dark"> 
+                   Total tareas registradas: <span class="badge bg-primary" id="span-tareas-total"></span>
+                </button>
+                
+                <button type="button" class="rounded-pill btn btn-dark"> 
+                    Tareas pendientes: <span class="badge bg-warning" id="span-tareas-pendientes"></span>
+                </button>
+                
+                <button type="button" class="rounded-pill btn btn-dark"> 
+                    Tareas finalizadas: <span class="badge bg-success" id="span-tareas-finalizadas"></span>
+                </button>
+                
+            </div>
+            
+            <div>
+                <table class="table table-hover table-sm d-none" id="tabla-tareas">
+                    
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col" style="width: 17%;">ID</th>
+                            <th scope="col"  style="width: 16%;">Descripción</th>
+                            <th scope="col" style="width: 5%;">Estado</th>
+                            <th scope="col" style="width: 6%;">Fecha creación</th>
+                            <th scope="col" style="width: 1%;">Duración</th>
+                            <th scope="col" style="width: 10%;">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- AQUÍ SE AGREGAN LAS TAREAS DE FORMA DINÁMICA -->
+                    </tbody>
+                </table>
+                <div id="mensaje-sin-tareas" class="d-none">
+                    <p class="text-center fs-1 fw-bold">No existen tareas</p>
+                </div>
+
+                <div class="d-flex justify-content-center" id="spinner-tabla-loader">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Estructura del Modal Nativo -->
+    <dialog id="modal-tarea">
+        <div class="modal-contenido">
+            <h3>Modificar Tarea ....</h3>
+            
+            <form id="form-tarea" method="dialog"> <!-- method="dialog" cierra el modal al enviar -->
+                <div class="form-group">
+                    <label for="" class="d-none" id="input-id"></label>
+                    <input type="text" id="input-descripcion" class="form-control" name="descripcion" required
+                        placeholder="Agrega la descripción de la tarea...">
+                </div>
+                
+                <div class="modal-acciones">
+                    
+                    <button type="submit" class="btn btn-dark">Guardar</button>
+                    <button type="button" id="btn-cerrar-modal" class="btn btn-light"">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+
+</body>
+
+</html>
